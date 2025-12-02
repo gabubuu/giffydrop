@@ -1,5 +1,7 @@
 # giffydrop
 
+![giffydrop](giffydrop.png)
+
 a tool to make discord gifs from mp4 videos. it's basically ffmpeg with a nice gui so you don't have to remember command line stuff.
 
 ![python](https://img.shields.io/badge/python-3.10%2B-blue)
@@ -89,7 +91,6 @@ sudo apt install ffmpeg
 ### banner  
 - fixed at 600x auto
 - 15 fps by default (saves space)
-- good for server banners
 
 ## fps options
 
@@ -142,63 +143,3 @@ ffmpeg -version
 
 ### it's slow
 yeah, two-pass encoding takes time. bigger videos take longer. that's normal.
-
-## license
-
-MIT - do whatever you want with it
-
----
-
-made because constantly running ffmpeg commands is annoying
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
-
-## 🐛 Troubleshooting
-
-### "FFmpeg not found in PATH"
-- Ensure FFmpeg is installed correctly
-- Verify it's in your system PATH by running `ffmpeg -version` in terminal
-- On Windows, you may need to restart your terminal/IDE after installation
-
-### "File exceeds Discord limit (9.9MB)"
-- Try reducing the FPS (e.g., from 20 to 15 or 10)
-- Select a smaller width option
-- Consider trimming your video further in an external editor
-
-### GUI appears blurry on Windows
-- Right-click `python.exe` → Properties → Compatibility → Change high DPI settings
-- Check "Override high DPI scaling behavior"
-
-### Conversion is slow
-- This is normal for high-quality two-pass encoding
-- The status log shows real-time progress
-- Larger videos take proportionally longer
-
-## 🙏 Acknowledgments
-
-- **FFmpeg**: The powerful multimedia framework that makes this possible
-- **CustomTkinter**: Modern and customizable tkinter UI library
-- **Discord**: For being the awesome platform this tool serves
-
-## 📞 Support
-
-- 🐛 **Issues**: [GitHub Issues](https://github.com/yourusername/giffydrop/issues)
-- 💬 **Discussions**: [GitHub Discussions](https://github.com/yourusername/giffydrop/discussions)
-
----
-
-<p align="center">Made with ❤️ for the Discord community</p>

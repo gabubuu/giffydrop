@@ -1,6 +1,6 @@
 # giffydrop
 
-![giffydrop](giffydrop.png)
+<img src="giffydrop.png" alt="giffydrop app screenshot" width="50%"/>
 
 a tool to make discord gifs from mp4 videos. it's basically ffmpeg with a nice gui so you don't have to remember command line stuff.
 

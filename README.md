@@ -8,11 +8,11 @@ a tool to make discord gifs from mp4 videos. it's basically ffmpeg with a nice g
 ![license](https://img.shields.io/badge/license-MIT-green)
 ![works on](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey)
 
-so basically, you have a video that's already edited and trimmed, and you need to turn it into a gif for discord that doesn't exceed the 9.9MB limit. this tool does that without destroying the quality.
+so basically, you have a video that's already edited and trimmed, and you need to turn it into a gif for discord that doesn't exceed the 10MB limit. this tool does that without destroying the quality.
 
 ## what it does
 
-- keeps gifs under 9.9MB (discord's limit)
+- keeps gifs under 10MB (discord's limit)
 - two-pass encoding (fancy ffmpeg stuff to make it look good)
 - dark mode ui that doesn't hurt your eyes
 - two profiles: one for avatar pics, one for banners

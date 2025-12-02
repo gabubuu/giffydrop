@@ -172,6 +172,8 @@ class GiffyConverter:
     def check_file_size(self, log_callback) -> float:
         """
         Check the final GIF size and log warnings if needed.
+        Discord's limit is 10MB for regular users, 50MB for nitro+ users.
+        We use 10MB as the safe threshold.
         
         Args:
             log_callback: Function to call with output messages.
@@ -187,8 +189,8 @@ class GiffyConverter:
         
         log_callback(f"\n📊 Final size: {size_mb:.2f} MB\n")
         
-        if size_mb > 9.9:
-            log_callback("\n⚠ WARNING: File exceeds Discord limit (9.9MB).\n")
+        if size_mb > 10.0:
+            log_callback("\n⚠ WARNING: File exceeds Discord limit (10MB).\n")
             log_callback("   Try lowering FPS or Width for a smaller file.\n")
         else:
             log_callback("✓ File size is within Discord limits!\n")

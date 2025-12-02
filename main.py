@@ -173,7 +173,7 @@ class GiffyConverter:
         """
         Check the final GIF size and log warnings if needed.
         Discord's limit is 10MB for regular users, 50MB for nitro+ users.
-        We use 10MB as the safe threshold.
+        We target 9.9MB as the safe threshold.
         
         Args:
             log_callback: Function to call with output messages.
@@ -189,8 +189,8 @@ class GiffyConverter:
         
         log_callback(f"\n📊 Final size: {size_mb:.2f} MB\n")
         
-        if size_mb > 10.0:
-            log_callback("\n⚠ WARNING: File exceeds Discord limit (10MB).\n")
+        if size_mb > 9.9:
+            log_callback("\n⚠ WARNING: File exceeds Discord limit (9.9MB).\n")
             log_callback("   Try lowering FPS or Width for a smaller file.\n")
         else:
             log_callback("✓ File size is within Discord limits!\n")
@@ -200,6 +200,7 @@ class GiffyConverter:
     def convert(self, log_callback) -> bool:
         """
         Execute the full conversion pipeline.
+        Automatically adjusts FPS if file exceeds 9.9MB limit.
         
         Args:
             log_callback: Function to call with output messages.
@@ -221,8 +222,45 @@ class GiffyConverter:
             self.cleanup_temp_files(log_callback)
             return False
         
-        # Check file size
-        self.check_file_size(log_callback)
+        # Check file size and auto-adjust if needed
+        size_mb = self.check_file_size(log_callback)
+        
+        # Auto-adjust FPS if file is too large
+        if size_mb > 9.9:
+            log_callback("\n🔧 Auto-adjusting FPS to meet Discord limit...\n\n")
+            
+            # FPS reduction cascade
+            fps_options = [20, 15, 10, 8, 5]
+            for reduced_fps in fps_options:
+                if reduced_fps >= self.fps:
+                    continue
+                
+                log_callback(f"⏳ Retrying with {reduced_fps} fps...\n\n")
+                
+                # Update fps and regenerate
+                self.fps = reduced_fps
+                
+                # Regenerate palette with new fps
+                if not self.generate_palette(log_callback):
+                    self.cleanup_temp_files(log_callback)
+                    return False
+                
+                # Regenerate GIF with new fps
+                if not self.generate_gif(log_callback):
+                    self.cleanup_temp_files(log_callback)
+                    return False
+                
+                # Check size again
+                size_mb = self.check_file_size(log_callback)
+                
+                if size_mb <= 9.9:
+                    log_callback(f"\n✓ Auto-adjustment successful! Final size: {size_mb:.2f} MB\n")
+                    break
+            
+            # If still too large after all attempts
+            if size_mb > 9.9:
+                log_callback("\n⚠ Could not reduce file below 9.9MB with available FPS options.\n")
+                log_callback("   Consider trimming the video or using a smaller width profile.\n")
         
         # Cleanup
         self.cleanup_temp_files(log_callback)
